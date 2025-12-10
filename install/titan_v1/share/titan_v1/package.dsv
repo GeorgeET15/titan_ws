@@ -1,0 +1,8 @@
+source;share/titan_v1/hook/cmake_prefix_path.ps1
+source;share/titan_v1/hook/cmake_prefix_path.dsv
+source;share/titan_v1/hook/cmake_prefix_path.sh
+source;share/titan_v1/local_setup.bash
+source;share/titan_v1/local_setup.dsv
+source;share/titan_v1/local_setup.ps1
+source;share/titan_v1/local_setup.sh
+source;share/titan_v1/local_setup.zsh

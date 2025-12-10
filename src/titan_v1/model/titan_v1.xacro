@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<robot name="titan_v1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ===================== -->
+  <!--   GLOBAL PROPERTIES   -->
+  <!-- ===================== -->
+
+  <!-- Base geometry -->
+  <xacro:property name="wheel_radius"      value="0.1"/>   <!-- 10 cm -->
+  <xacro:property name="wheel_width"       value="0.05"/>  <!-- 5 cm -->
+  <xacro:property name="wheel_sep_width"   value="0.4"/>   <!-- left-right distance -->
+  <xacro:property name="wheel_sep_length"  value="0.6"/>   <!-- front-rear distance -->
+  <xacro:property name="body_height"       value="0.1"/>   <!-- height of base box -->
+  <xacro:property name="body_mass"         value="15"/>
+
+  <!-- Convenience: where wheel centers sit relative to base_link -->
+  <!-- base_link origin is at the center of the box -->
+  <!-- base bottom is at -body_height/2. We want wheel center slightly below base. -->
+  <xacro:property name="wheel_center_z" value="${-body_height/2 + wheel_radius}"/>
+
+  <!-- ===================== -->
+  <!--      BASE LINK        -->
+  <!-- ===================== -->
+
+  <!-- base_link at box center -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${wheel_sep_length} ${wheel_sep_width} ${body_height}"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.4 0.4 0.4 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${wheel_sep_length} ${wheel_sep_width} ${body_height}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${body_mass}"/>
+      <inertia ixx="0.3" iyy="0.3" izz="0.3" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <!-- ===================== -->
+  <!--    WHEEL MACRO        -->
+  <!-- ===================== -->
+
+  <xacro:macro name="wheel" params="name x y">
+    <!-- Wheel Link -->
+    <link name="${name}_link">
+      <visual>
+      <!-- Rotate around X so cylinder axis aligns with Y -->
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <!-- SAME rotation -->
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+    </collision>
+
+
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+
+    <!-- Wheel Joint -->
+    <joint name="${name}_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="${name}_link"/>
+
+      <!-- Wheel center position relative to base_link center -->
+      <origin xyz="${x} ${y} ${wheel_center_z}" rpy="0 0 0"/>
+
+      <!-- Physical rotation axis (matches diff-drive plugin expectation) -->
+      <axis xyz="0 1 0"/>
+
+      <limit effort="50" velocity="50"/>
+      <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- ===================== -->
+  <!--   WHEEL INSTANCES     -->
+  <!-- ===================== -->
+
+  <xacro:wheel name="front_left"
+               x="${ wheel_sep_length/2}"
+               y="${ wheel_sep_width/2}"/>
+
+  <xacro:wheel name="rear_left"
+               x="${-wheel_sep_length/2}"
+               y="${ wheel_sep_width/2}"/>
+
+  <xacro:wheel name="front_right"
+               x="${ wheel_sep_length/2}"
+               y="${-wheel_sep_width/2}"/>
+
+  <xacro:wheel name="rear_right"
+               x="${-wheel_sep_length/2}"
+               y="${-wheel_sep_width/2}"/>
+
+  <!-- ===================== -->
+  <!--     GAZEBO PLUGINS    -->
+  <!-- ===================== -->
+
+  <!-- Friction for the base -->
+  <gazebo reference="base_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+  <!-- Differential drive plugin for GZ (4-wheel diff drive) -->
+  <gazebo reference="base_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      
+      <left_joint>front_left_joint</left_joint>
+      <right_joint>front_right_joint</right_joint>
+
+      <wheel_separation>0.4</wheel_separation>
+      <wheel_radius>${wheel_radius}</wheel_radius>
+
+      <max_linear_acceleration>5.0</max_linear_acceleration>
+      <max_angular_acceleration>10.0</max_angular_acceleration>
+
+      <topic>/model/titan_v1/cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+    </plugin>
+  </gazebo>
+
+</robot>

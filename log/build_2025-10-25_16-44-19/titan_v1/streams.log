@@ -1,0 +1,45 @@
+[0.009s] Invoking command in '/home/georgeet15/titan_ws/build/titan_v1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/georgeet15/titan_ws/src/titan_v1 -DCMAKE_INSTALL_PREFIX=/home/georgeet15/titan_ws/install/titan_v1
+[0.060s] -- The C compiler identification is GNU 13.3.0
+[0.118s] -- The CXX compiler identification is GNU 13.3.0
+[0.135s] -- Detecting C compiler ABI info
+[0.224s] -- Detecting C compiler ABI info - done
+[0.232s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.232s] -- Detecting C compile features
+[0.232s] -- Detecting C compile features - done
+[0.242s] -- Detecting CXX compiler ABI info
+[0.339s] -- Detecting CXX compiler ABI info - done
+[0.347s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.347s] -- Detecting CXX compile features
+[0.348s] -- Detecting CXX compile features - done
+[0.352s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.492s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.682s] -- Configuring done (0.7s)
+[0.686s] -- Generating done (0.0s)
+[0.687s] -- Build files have been written to: /home/georgeet15/titan_ws/build/titan_v1
+[0.692s] Invoked command in '/home/georgeet15/titan_ws/build/titan_v1' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/georgeet15/titan_ws/src/titan_v1 -DCMAKE_INSTALL_PREFIX=/home/georgeet15/titan_ws/install/titan_v1
+[0.693s] Invoking command in '/home/georgeet15/titan_ws/build/titan_v1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/georgeet15/titan_ws/build/titan_v1 -- -j16 -l16
+[0.737s] Invoked command in '/home/georgeet15/titan_ws/build/titan_v1' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/georgeet15/titan_ws/build/titan_v1 -- -j16 -l16
+[0.750s] Invoking command in '/home/georgeet15/titan_ws/build/titan_v1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/georgeet15/titan_ws/build/titan_v1
+[0.759s] -- Install configuration: ""
+[0.759s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/launch
+[0.759s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/launch/titan_v1.launch.py
+[0.760s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/model
+[0.760s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/model/titan_v1.xacro
+[0.760s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/config
+[0.760s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/config/gz_bridge.yaml
+[0.760s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/ament_index/resource_index/package_run_dependencies/titan_v1
+[0.760s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/ament_index/resource_index/parent_prefix_path/titan_v1
+[0.760s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/environment/ament_prefix_path.sh
+[0.761s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/environment/ament_prefix_path.dsv
+[0.761s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/environment/path.sh
+[0.761s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/environment/path.dsv
+[0.761s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/local_setup.bash
+[0.761s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/local_setup.sh
+[0.761s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/local_setup.zsh
+[0.761s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/local_setup.dsv
+[0.762s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/package.dsv
+[0.762s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/ament_index/resource_index/packages/titan_v1
+[0.762s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/cmake/titan_v1Config.cmake
+[0.762s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/cmake/titan_v1Config-version.cmake
+[0.762s] -- Installing: /home/georgeet15/titan_ws/install/titan_v1/share/titan_v1/package.xml
+[0.764s] Invoked command in '/home/georgeet15/titan_ws/build/titan_v1' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/georgeet15/titan_ws/build/titan_v1

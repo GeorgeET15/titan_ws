@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd"
+            schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>titan_v1</name>
+  <version>0.0.1</version>
+  <description>
+    TITAN V1 (Trash Interception and Termination Autonomous Navigator):
+    A 4-wheel differential-drive campus waste collection robot with
+    scissor-lift dustbin handling, simulated in Gazebo Harmonic and
+    integrated with ROS 2.
+  </description>
+
+  <maintainer email="ironmanrocks353@gmail.com">georgeet15</maintainer>
+  <license>TODO: License declaration</license>
+
+  <!-- ========================= -->
+  <!--         BUILD TOOL        -->
+  <!-- ========================= -->
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- ========================= -->
+  <!--       EXEC DEPENDENCY     -->
+  <!-- ========================= -->
+
+  <!-- Robot description and transforms -->
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <!-- Gazebo Sim integration -->
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+
+  <!-- Teleop for manual cmd_vel testing -->
+  <exec_depend>teleop_twist_keyboard</exec_depend>
+
+  <!-- Core ROS interfaces used in this package -->
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>tf2_msgs</exec_depend>
+  <exec_depend>rosgraph_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <!-- (Optional) If you later add Nav2 / SLAM, you will extend deps here -->
+
+  <!-- ========================= -->
+  <!--           TESTING         -->
+  <!-- ========================= -->
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <!-- ========================= -->
+  <!--           EXPORT          -->
+  <!-- ========================= -->
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
