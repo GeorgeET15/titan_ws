@@ -56,24 +56,23 @@
     <!-- Wheel Link -->
     <link name="${name}_link">
       <visual>
-      <!-- Rotate around X so cylinder axis aligns with Y -->
-      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
-      <geometry>
-        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
-      </geometry>
-      <material name="black">
-        <color rgba="0 0 0 1"/>
-      </material>
-    </visual>
+        <!-- Rotate cylinder so it looks like a wheel.
+             Cylinder axis is Z by default; we rotate about Y so it lays sideways. -->
+        <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+        <material name="black">
+          <color rgba="0 0 0 1"/>
+        </material>
+      </visual>
 
-    <collision>
-      <!-- SAME rotation -->
-      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
-      <geometry>
-        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
-      </geometry>
-    </collision>
-
+      <collision>
+        <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
 
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -129,30 +128,34 @@
   </gazebo>
 
   <!-- Differential drive plugin for GZ (4-wheel diff drive) -->
-  <gazebo reference="base_link">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-  </gazebo>
-
   <gazebo>
     <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
-      
+      <!-- Left wheels -->
       <left_joint>front_left_joint</left_joint>
-      <right_joint>front_right_joint</right_joint>
+      <left_joint>rear_left_joint</left_joint>
 
-      <wheel_separation>0.4</wheel_separation>
+      <!-- Right wheels -->
+      <right_joint>front_right_joint</right_joint>
+      <right_joint>rear_right_joint</right_joint>
+
+      <!-- Geometry -->
+      <wheel_separation>${wheel_sep_width}</wheel_separation>
       <wheel_radius>${wheel_radius}</wheel_radius>
 
+      <!-- Limits -->
       <max_linear_acceleration>5.0</max_linear_acceleration>
       <max_angular_acceleration>10.0</max_angular_acceleration>
 
-      <topic>/model/titan_v1/cmd_vel</topic>
+      <!-- ROS/GZ topics (bridged externally) -->
+      <topic>cmd_vel</topic>
       <odom_topic>odom</odom_topic>
 
+      <!-- Frames (for GZ side; ROS uses bridges) -->
       <frame_id>odom</frame_id>
       <child_frame_id>base_link</child_frame_id>
     </plugin>
 
+    <!-- Joint state publisher system (publishes /joint_states via bridge) -->
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
       <topic>joint_states</topic>
     </plugin>
